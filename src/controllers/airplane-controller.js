@@ -61,6 +61,8 @@ async function destroyAirplane(req, res){
 }
 
 async function updateAirplane(req, res){
+  console.log('inside controller update',req.params.id,req.body);
+  
   try{
     const airplane =  await AirplaneService.updateAirplane(req.params.id, req.body);
     SuccessResponse.data = airplane;
