@@ -61,7 +61,6 @@ async function destroyAirplane(id) {
 
 
 async function updateAirplane(id, data){
-  console.log("inside service update",id,data)
   try {
      const response =  await airplaneRepository.update(id, data);
      return response;
