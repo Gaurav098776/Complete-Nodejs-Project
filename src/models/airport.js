@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.City, {
-        foreignKey: 'city_Id',
+        foreignKey: 'cityId',
         onDelete: 'CASCADE',
       })
       this.hasMany(models.Flight, {
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
-    city_Id: {
+    cityId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     }
