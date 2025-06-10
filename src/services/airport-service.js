@@ -54,10 +54,23 @@ async function destroyAirport(id) {
         throw new AppError('Cannot destroy the airport', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
+
+async function updateAirport(id,data) {
+    try {
+        const response = await airportRepository.update(id,data);
+        return response;
+    } catch(error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('The airport you requested to update is not present', error.statusCode);
+        }
+        throw new AppError('Cannot update the airport', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
  
 module.exports = {
     createAirport,
     getAirports,
     getAirport,
-    destroyAirport
+    destroyAirport,
+    updateAirport
 }
