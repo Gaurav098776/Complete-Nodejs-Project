@@ -4,6 +4,7 @@ const { ErrorResponse, SuccessResponse } = require("../utils/common");
 
 
 
+
 /**
  * POST : /flights
  * req.body {flightNumber:'UK',airplaneId:'a380',departureAirportId:'DEL',arrivalAirportId:'MUM',arrivalTime:11:10:0,departureTime:'9:10:0',price:2000,boardingGate:12a,totalSeats:120}
@@ -63,6 +64,22 @@ async function getFlight(req, res){
 }
 
 
+async function updateSeats (req,res) {
+  try{
+    const response = await FlightService.updateSeats({
+      flightId : req.params.id,
+      seats : req.body.seats,
+      dec : req.body.dec
+    })
+     SuccessResponse.data = response;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error){
+    ErrorResponse.error = error;
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
+
 
 
 
@@ -71,6 +88,7 @@ async function getFlight(req, res){
 module.exports = {
   createFlight,
   getAllFlights,
-  getFlight
+  getFlight,
+  updateSeats
   
 };
